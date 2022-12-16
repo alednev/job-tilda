@@ -5,8 +5,8 @@
  * Вывести получившийся массив и суммы по строкам и по столбцам.
  */
 
-$cols   = 5;
-$rows   = 7;
+$cols   = 7;
+$rows   = 5;
 $matrix = [];
 
 // заполнение массива случайными числами
@@ -18,9 +18,12 @@ for ($i = 0; $i < $rows; $i++) {
 
 // грязный лайфхак - так не надо делать
 echo '<table border="1">';
-echo '<th>';
-echo '<td></td><td></td><td></td><td></td><td></td><td>rowsum</td>';
-echo '</th>';
+echo '<thead>';
+echo '<tr>';
+echo '<th colspan="'. $cols + 1 .'"></th><th>rowsum</th>';
+echo '</tr>';
+echo '</thead>';
+echo '<tbody>';
 
 // вывод массива на экран
 for ($row = 0; $row < $rows; $row++) {
@@ -36,11 +39,18 @@ for ($row = 0; $row < $rows; $row++) {
     echo '<td>' . array_sum($matrix[$row]) . '</td>';
     echo '</tr>';
 }
+echo '</tbody>';
 
+echo '<tfoot>';
+echo '<tr>';
 echo '<td>colsum</td>';
+
 // подсчет суммы в столбце
 for ($col = 0; $col < $cols; $col++) {
     echo '<td>' . array_sum(array_column($matrix, $col)) . '</td>';
 }
 
+echo '<td></td>';
+echo '</tr>';
+echo '</tfoot>';
 echo '</table>';
