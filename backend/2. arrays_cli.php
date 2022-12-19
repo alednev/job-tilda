@@ -40,3 +40,42 @@ for ($col = 0; $col < $cols; $col++) {
 }
 
 echo PHP_EOL . PHP_EOL;
+
+/**
+ * второй глобальный вариант, когда ключи не цифровые
+ */
+echo "Version 2:" . PHP_EOL . PHP_EOL;
+
+$dayTasks = [
+    ['Reading' => 2, 'Writing' => 5, 'Cooking' => 2, 'Walking' => 1],
+    ['Reading' => 3, 'Writing' => 4, 'Cooking' => 1, 'Walking' => 0.5],
+    ['Reading' => 2, 'Writing' => 6, 'Cooking' => 1, 'Walking' => 1],
+    ['Reading' => 3, 'Writing' => 5, 'Cooking' => 2, 'Walking' => 0.5],
+    ['Reading' => 1, 'Writing' => 7, 'Cooking' => 2, 'Walking' => 1],
+];
+
+$dayHours = [];
+
+foreach ($dayTasks as $row) {
+    foreach ($row as $col) {
+        echo ' ' . $col;
+    }
+
+    // подсчет суммы в ряду
+    $dayHours[] = array_sum($row);
+
+    echo PHP_EOL;
+}
+
+echo PHP_EOL . 'Sum by rows: ' . print_r($dayHours);
+
+// результирующий массив сумм по столбцам
+$totalHours = [];
+
+foreach ($dayTasks as $day) {
+    foreach ($day as $task => $hours) {
+        array_key_exists($task, $totalHours) ? $totalHours[$task] += $hours : $totalHours[$task] = $hours;
+    }
+}
+
+echo PHP_EOL . 'Sum by columns: ' . print_r($totalHours);
