@@ -1,0 +1,18 @@
+server {
+    server_name [domain] www.[domain];
+
+    listen 443;
+
+    ssl on;
+    ssl_certificate /etc/ssl/[cert];
+    ssl_certificate_key /etc/ssl/[key];
+
+    root /home/www/public_html/[domain]/public/;
+
+    access_log /var/log/nginx/nginx.[domain].access.log;
+    error_log /var/log/nginx/nginx.[domain].error.log;
+
+    location / {
+        index index.html;
+    }
+}
