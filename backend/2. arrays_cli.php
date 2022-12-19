@@ -5,20 +5,25 @@
  * Вывести получившийся массив и суммы по строкам и по столбцам.
  */
 
-$cols   = 7;
-$rows   = 5;
+$n      = 5;
+$m      = 7;
 $matrix = [];
 
 // заполнение двумерного массива случайными числами
-for ($i = 0; $i < $rows; $i++) {
-    for ($j = 0; $j < $cols; $j++) {
-        $matrix[$i][$j] = random_int(1, 1000);
+for ($i = 0; $i < $n; $i++) {
+    for ($j = 0; $j < $m; $j++) {
+        $matrix[$i][$j] = random_int(1, 10);
     }
 }
 
-// вывод двумерного массива на экран
-for ($row = 0; $row < $rows; $row++) {
-    for ($col = 0; $col < $cols; $col++) {
+// ===================
+
+echo 'Version 1:' . PHP_EOL . PHP_EOL;
+
+// допустим, что мы не знаем размерность массива
+// тогда надо высчитывать количество строк и столбцов
+for ($row = 0, $rows = count($matrix); $row < $rows; $row++) {
+    for ($col = 0, $cols = count($matrix[$row]); $col < $cols; $col++) {
         echo ' ' . $matrix[$row][$col];
     }
 
@@ -27,9 +32,11 @@ for ($row = 0; $row < $rows; $row++) {
     echo PHP_EOL;
 }
 
-// подсчет суммы в столбце
+// подсчет суммы в столбцах
+// можно использовать уже вычесленный $cols из второго for
+// а можно заново найти количество столбцов как count($matrix[0])
 for ($col = 0; $col < $cols; $col++) {
     echo ' col sum=' . array_sum(array_column($matrix, $col));
 }
 
-echo PHP_EOL;
+echo PHP_EOL . PHP_EOL;
